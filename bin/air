@@ -13,9 +13,13 @@ else
   filename="$2"
 fi
 
-nasm -f elf64 "$1" -o "$filename".o
-ld "$filename".o -o "$filename"
+nasm -f elf32 "$1" -o "$filename".o
+ld "$filename".o -m elf_i386 -o "$filename"
 echo -e "output:"
 ./"$filename"
 echo -e "\nexit code:\n"$?
-rm "$filename".o "$filename"
+rm "$filename".o
+
+if [[ "$2" == "" ]]; then
+  rm "$filename"
+fi
