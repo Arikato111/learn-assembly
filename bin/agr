@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+# compile run and remove file associated.
+
+if [[ "$1" == "" ]]; then
+  echo not specific file name
+  exit 1
+fi
+
+if [[ "$2" == "" ]]; then
+  filename=$(echo -n "$1" | cut -d '.' -f 1)
+else
+  filename="$2"
+fi
+
+echo "$filename"
+
+as --32 "$1" -o "$filename".o
+gcc -o "$filename" -m32 "$filename".o -nostdlib
+./"$filename"
+rm "$filename".o "$filename"
