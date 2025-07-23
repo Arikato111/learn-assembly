@@ -16,6 +16,7 @@ fi
 
 as "$1" --32 -o "$filename".o
 gcc -o "$filename" -m32 "$filename".o -nostdlib
-printf "output:\n\n"
+echo -e "\noutput:"
 ./"$filename"
+echo -e "\nexit code:\n"$?
 rm "$filename".o "$filename"

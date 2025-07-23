@@ -15,5 +15,7 @@ fi
 
 nasm -f elf64 "$1" -o "$filename".o
 ld "$filename".o -o "$filename"
+echo -e "output:"
 ./"$filename"
+echo -e "\nexit code:\n"$?
 rm "$filename".o "$filename"
