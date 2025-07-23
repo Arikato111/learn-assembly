@@ -7,15 +7,15 @@ if [[ "$1" == "" ]]; then
   exit 1
 fi
 
-if [[ "$1" == "" ]]; then
-  filename=$(echo -n "$1" | cut -d '.' -f 1)
+if [[ "$2" == "" ]]; then
+  filename=$(echo -n "$1" | sed 's=./=='  | cut -d '.' -f 1)
 else
-  filename="$1"
+  filename="$2"
 fi
 
-echo "$filename"
 
-as "$1" -o "$filename".o
-gcc -o "$filename" "$filename".o -nostdlib
+as "$1" --32 -o "$filename".o
+gcc -o "$filename" -m32 "$filename".o -nostdlib
+printf "output:\n\n"
 ./"$filename"
 rm "$filename".o "$filename"

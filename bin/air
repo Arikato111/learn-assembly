@@ -7,10 +7,10 @@ if [[ "$1" == "" ]]; then
   exit 1
 fi
 
-if [[ "$1" == "" ]]; then
-  filename=$(echo -n "$1" | cut -d '.' -f 1)
+if [[ "$2" == "" ]]; then
+  filename=$(echo -n "$1" | sed 's=./==' | cut -d '.' -f 1)
 else
-  filename="$1"
+  filename="$2"
 fi
 
 nasm -f elf64 "$1" -o "$filename".o
