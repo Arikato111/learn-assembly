@@ -1,0 +1,18 @@
+#!/usr/bin/bash
+
+if [[ "$1" == "" ]]; then
+  echo not specific file name
+  exit 1
+fi
+
+if [[ "$2" == "" ]]; then
+  filename=$(printf "$1" | cut -d '.' -f 1)
+else
+  filename="$2"
+fi
+
+echo "$filename"
+
+nasm -f elf64 "$1" -o "$filename".o
+ld "$filename".o -o "$filename"
+rm "$filename".o
