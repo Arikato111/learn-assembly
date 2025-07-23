@@ -7,10 +7,10 @@ if [[ "$1" == "" ]]; then
   exit 1
 fi
 
-if [[ "$2" == "" ]]; then
+if [[ "$1" == "" ]]; then
   filename=$(echo -n "$1" | cut -d '.' -f 1)
 else
-  filename="$2"
+  filename="$1"
 fi
 
 nasm -f elf64 "$1" -o "$filename".o

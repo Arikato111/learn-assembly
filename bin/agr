@@ -7,15 +7,15 @@ if [[ "$1" == "" ]]; then
   exit 1
 fi
 
-if [[ "$2" == "" ]]; then
+if [[ "$1" == "" ]]; then
   filename=$(echo -n "$1" | cut -d '.' -f 1)
 else
-  filename="$2"
+  filename="$1"
 fi
 
 echo "$filename"
 
-as --32 "$1" -o "$filename".o
-gcc -o "$filename" -m32 "$filename".o -nostdlib
+as "$1" -o "$filename".o
+gcc -o "$filename" "$filename".o -nostdlib
 ./"$filename"
 rm "$filename".o "$filename"
